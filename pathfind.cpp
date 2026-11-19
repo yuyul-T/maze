@@ -13,9 +13,9 @@ std::vector<Point> BFSFindPath(const Maze& maze, Point start, Point end)
     const int SIZE = 20;
     // 前驱记录，用来回溯路径；-1代表无父节点
     int prev[SIZE][SIZE];
-    memset(prev, -1, sizeof(prev));
-    bool visited[SIZE][SIZE] = {false};
-    std::queue<Point> q;
+    memset(prev, -1, sizeof(prev));//快速把prev全部填成-1
+    bool visited[SIZE][SIZE] ={false};
+    std::queue<Point> q;//存待探索的坐标点
 
     q.push(start);
     visited[start.r][start.c] = true;

@@ -1,7 +1,4 @@
-/*
-player.h 头文件定义所有和角色相关的内容
-*/
-
+//定义角色相关的信息
 #ifndef PLAYER_H
 #define PLAYER_H
 
@@ -17,7 +14,7 @@ struct Player{
 private:
     Texture2D texture; // 角色的贴图
     Vector2 position; // 角色当前在屏幕上的位置（像素坐标）
-    PlayerState state{STANDING};
+    PlayerState state{STANDING};//初始状态，静止
     Rectangle curr_frame_rectangle{0,0, 48.0F, 48.0F}; // 关键帧矩形，用于标注贴图中渲染的区域
     int curr_frame{0}; // 当前关键帧
     float timer{0.0F}; // 计时器，用于计算关键帧动画
@@ -38,7 +35,7 @@ public:
     void update(); // 根据按键以及角色状态更新角色的位置
     void draw() const; // 将角色绘制到屏幕
 
-    auto get_curr_coord() const -> Coordinate { return curr_coor; }
+    Coordinate get_curr_coord() const { return curr_coor; }
 };
 
 #endif

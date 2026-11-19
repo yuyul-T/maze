@@ -1,7 +1,4 @@
-/*
-maze.h 头文件定义所有和迷宫相关的内容
- */
-
+//迷宫的相关数据信息
 #ifndef MAZE_H
 #define MAZE_H
 
@@ -10,13 +7,11 @@ maze.h 头文件定义所有和迷宫相关的内容
 #include <unordered_map>
 #include <string>
 
-constexpr float TILE_WIDTH{64.0F}; // 地块宽度
-constexpr float TILE_HEIGHT{64.0F}; // 地块高度
+const float TILE_WIDTH=64.0F; // 地块宽度
+const float TILE_HEIGHT=64.0F; // 地块高度
 
 // 地块的种类
-enum TileType{
-    END=-2, START, FLOOR, WALL, GRASS, LAVA  
-};
+enum TileType {END=-2, START, FLOOR, WALL, GRASS, LAVA};
 
 // 地块的地图坐标
 struct Coordinate{
@@ -32,7 +27,7 @@ struct Tile{
 struct Maze{
     private:
         std::unordered_map<TileType, Texture2D> textures; // 所有地块贴图
-        std::vector<std::vector<Tile>> tiles; // 使用二维矩阵存储所有地块
+        std::vector<std::vector<Tile>> tiles; // 使用二维矩阵存储所有地块 title[y][x]代表第y行第x列的格子
         Coordinate start_coord{-1, -1}; // 起点坐标
         Coordinate end_coord{-1, -1};  // 终点坐标
 
@@ -43,12 +38,12 @@ struct Maze{
         Maze(const std::string&);
         ~Maze();
 
-        void draw() const; // 将地图绘制到屏幕
-        auto get_start_coord() const -> Coordinate; // 获取起点的地图坐标
-        auto get_tile_type(Coordinate) const -> TileType; // 获取地块的类型
-        auto get_tile_position(Coordinate) const -> Vector2; // 获取地块的屏幕像素坐标
+        void draw(); // 将地图绘制到屏幕
+        Coordinate get_start_coord() const; // 获取起点的地图坐标
+        TileType get_tile_type(Coordinate) const; // 获取地块的类型
+        Vector2 get_tile_position(Coordinate) const; // 获取地块的屏幕像素坐标
 
-        auto get_end_coord() const -> Coordinate { return end_coord; }
+        Coordinate get_end_coord() const{ return end_coord; }//直接返回终点坐标
 };
 
 #endif

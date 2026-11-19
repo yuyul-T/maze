@@ -1,8 +1,10 @@
 #include <raylib.h>
 #include <format>
+#include<format>
 #include "maze.h"
 #include "player.h"
 #include"pathfind.h"
+
 bool showPath=false;
 std::vector<Point> path;
 
@@ -35,11 +37,11 @@ int main(){
         //绘制路径：画小圆点标记路径
         if(showPath)
         {
-            for(auto& pt:path)
+            for(Point& pt:path)
             {
                 float px=pt.c*TILE_WIDTH+TILE_WIDTH/2.0f;
                 float py=pt.r*TILE_HEIGHT+TILE_HEIGHT/2.0f;
-                DrawCircle(px,py,12,GREEN);
+                DrawCircle(px,py,12,BLACK);
             }
         }
             

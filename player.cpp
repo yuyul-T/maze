@@ -9,7 +9,7 @@ Player::Player(const Maze& m): maze(m){
     texture = LoadTextureFromImage(player_image);
     UnloadImage(player_image);
 
-    auto start_coord {m.get_start_coord()};
+    Coordinate start_coord = m.get_start_coord();
     curr_coor = start_coord;
     position = m.get_tile_position(start_coord);
 }
@@ -19,9 +19,7 @@ Player::~Player(){
     UnloadTexture(texture);
 }
 
-/*
-    角色更新主函数，每帧调用1次
-*/
+//角色更新主函数，每帧调用1次
 void Player::update(){
     control_update();
     if (state == STANDING) {return;}
@@ -29,9 +27,7 @@ void Player::update(){
     walk_update();
 }
 
-/*
-    计算角色当前动画帧
-*/
+// 计算角色当前动画帧
 void Player::determine_frame_rectangle(){
     timer += GetFrameTime();
     if(timer >= PLAYER_FRAME_TIME){
@@ -42,18 +38,12 @@ void Player::determine_frame_rectangle(){
     curr_frame_rectangle.x = curr_frame * 48.0f;
 }
 
-/*
-    在屏幕上绘制角色
-*/
+//在屏幕上绘制角色
 void Player::draw() const {
     DrawTextureRec(texture, curr_frame_rectangle, {position.x+8.0f,position.y+8.0f}, WHITE);
 }
 
-/*
-    转向
-    参数
-        to_state：更改的方向
-*/
+//转向  参数to_state：更改的方向
 void Player::turn(const PlayerState to_state){
     if (state == to_state){return;}
 
@@ -64,9 +54,7 @@ void Player::turn(const PlayerState to_state){
     timer = 0.0F;
 }
 
-/*
-    移动更新函数，每帧调用一次
-*/
+//移动更新函数，每帧调用一次
 void Player::walk_update(){
     if(state == STANDING) {return;}
 
@@ -87,9 +75,7 @@ void Player::walk_update(){
     position = Vector2Add(position, velocity);
 }
 
-/*
-    控制更新函数，每帧调用一次
-*/
+//控制更新函数，每帧调用一次
 void Player::control_update(){
     if(state != STANDING) {return;}
 
